@@ -142,7 +142,7 @@ export const uploadFileToGit = async (csv, dropName) => {
           console.log("repo push failed", failed);
         }
       );
-    }, 3000);
+    }, 2000);
   } catch (e) {
     console.log("check error now", e);
   }
