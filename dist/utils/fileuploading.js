@@ -11,10 +11,6 @@ const simpleGit = require("simple-git");
 const git = simpleGit();
 const shellJs = require("shelljs");
 shellJs.cd("./");
-const mv = promisify(fs.rename);
-const repo = "dropzero-drop-csvs";
-const userName = "blockzerolab";
-const password = process.env.password;
 exports.editFileName = (req, file, callback) => {
     try {
         const name = file.originalname.split(".")[0];
@@ -107,7 +103,7 @@ exports.uploadFileToGit = async (csv, dropName) => {
     try {
         await exports.movedFilePath(csv, dropName, "csvrecord");
         setTimeout(() => {
-            const gitHubUrl = `https://${"blockzerolab@gmail.com"}:${"Blockzero_Labs!"}@github.com/${"blockzerolab"}/${"dropzero-drop-csvs"}`;
+            const gitHubUrl = `https://${"blockzerolab@gmail.com"}:${process.env.password}@github.com/${"blockzerolab"}/${"dropzero-drop-csvs"}`;
             git.addConfig("user.email", "blockzerolab@gmail.com");
             git.addConfig("user.name", "blockzerolab");
             git.addRemote("origin", gitHubUrl);
