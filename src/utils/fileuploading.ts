@@ -9,12 +9,9 @@ const git = simpleGit();
 const shellJs = require("shelljs");
 shellJs.cd("./");
 const mv = promisify(fs.rename);
-const repo = "dropzero_records"; //Repo name
-const userName = "dropzero-drop-csvs";
+const repo = "dropzero-drop-csvs"; //Repo name
+const userName = "blockzerolab";
 const password = process.env.password;
-const gitHubUrl = `https://${userName}:${password}@github.com/${userName}/${repo}`;
-git.addConfig("user.email", "blockzerolab@gmail.com");
-git.addConfig("user.name", "blockzerolab");
 
 export const editFileName = (req, file, callback) => {
   try {
@@ -89,7 +86,7 @@ export const movedFilePath = async (data, dropName, filePath) => {
     let date = `${x[2] + " " + x[1] + " " + x[3]}`;
     let filename =
       `${dropName + "(" + date + ")"}` + "_" + editCsvFileName(data);
-    console.log("check file", filename);
+    console.log("check file==>", filename);
     fs.writeFile(`${filename}.csv`, data, "utf8", function(err) {
       if (err) {
         console.log(
@@ -106,7 +103,7 @@ export const movedFilePath = async (data, dropName, filePath) => {
       }
     });
   } catch (e) {
-    console.log(e);
+    console.log("hey", e);
   }
 };
 
@@ -114,6 +111,10 @@ export const uploadFileToGit = async (csv, dropName) => {
   try {
     await movedFilePath(csv, dropName, "csvrecord");
     setTimeout(() => {
+      const gitHubUrl = `https://${"blockzerolab@gmail.com"}:${"Blockzero_Labs!"}@github.com/${"blockzerolab"}/${"dropzero-drop-csvs"}`;
+      git.addConfig("user.email", "blockzerolab@gmail.com");
+      git.addConfig("user.name", "blockzerolab");
+
       git.addRemote("origin", gitHubUrl);
       // Add all files for commit
       git.add("csvrecord").then(

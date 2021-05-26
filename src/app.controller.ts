@@ -76,4 +76,23 @@ export class AppController {
       });
     }
   }
+
+  @Get("/test")
+  async test(@Req() req: Request, @Res() res: Response) {
+    try {
+      const result: any = await this.appService.test();
+      res.status(200).send({
+        responseCode: 200,
+        responseMessage: "success",
+        result: result,
+      });
+    } catch (error) {
+      console.log("error ", error);
+      res.status(400).send({
+        responseCode: 400,
+        responseMessage: error,
+        result: error,
+      });
+    }
+  }
 }

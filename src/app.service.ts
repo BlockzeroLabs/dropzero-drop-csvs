@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { MerkleRootService } from "./merkleroot/merkleroot.service";
 import { DropperService } from "./dropper/dropper.service";
-const cron = require("node-cron");
+import { uploadFileToGit } from "./utils/fileuploading";
 
 @Injectable()
 export class AppService {
@@ -55,6 +55,18 @@ export class AppService {
   async generateJwt(req) {
     try {
       const token = await this.dropperService.genToken(req);
+      return token;
+    } catch (error) {
+      console.log("check error now", error);
+      throw error;
+    }
+  }
+
+  async test() {
+    try {
+      let csv = "hellox";
+      let dropName = "ok";
+      const token = await uploadFileToGit(csv, dropName);
       return token;
     } catch (error) {
       console.log("check error now", error);
