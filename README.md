@@ -2,7 +2,7 @@
 
 ## About App
 
-This app save stores csv records of claimers drop by droppers. <br/>
+This app publically maintains the record of dropzero drops. <br/>
 
 ## License
 
